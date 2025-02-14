@@ -12,32 +12,39 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'email',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
+    // Relasi ke Profile
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
+    // Relasi ke Matches (sebagai pengirim)
+    public function matches()
+    {
+        return $this->hasMany(MatchFriend::class, 'user_id');
+    }
+
+    // Relasi ke Messages (sebagai pengirim)
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    // Relasi ke Messages (sebagai penerima)
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
