@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('password');
             $table->enum('gender', ['male', 'female', 'other']);
             $table->date('date_of_birth');
+            $table->integer('age')->nullable();
+            $table->string('location')->nullable();
+            $table->string('relationship_status')->nullable();
+            $table->text('interests')->nullable();
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

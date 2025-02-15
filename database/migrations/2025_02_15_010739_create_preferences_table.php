@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('match_friends', function (Blueprint $table) {
+        Schema::create('preferences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('matched_user_id')->constrained('users')->onDelete('cascade');
-            $table->enum('status', ['pending', 'accepted', 'rejected'])->default('pending');
-            $table->timestamp('matched_at')->nullable();
-            $table->boolean('is_mutual')->default(false); // Match terjadi jika kedua user saling like
+            $table->integer('min_age')->default(18);
+            $table->integer('max_age')->default(99);
+            $table->string('location')->nullable();
+            $table->json('interests')->nullable(); // Minat atau hobi
+            $table->enum('marital_status', ['single', 'divorced', 'widowed'])->default('single');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('match_friends');
+        Schema::dropIfExists('preferences');
     }
 };

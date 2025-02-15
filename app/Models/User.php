@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 // use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -18,6 +18,12 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'age',
+        'location',
+        'relationship_status',
+        'interests',
+        'gender',
+        'date_of_birth'
     ];
 
     protected $hidden = [
@@ -47,6 +53,20 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class, 'receiver_id');
     }
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
+    public function isPremium()
+    {
+        return $this->subscription && $this->subscription->isActive();
+    }
+    public function preference()
+    {
+        return $this->hasOne(Preference::class);
+    }
+
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',

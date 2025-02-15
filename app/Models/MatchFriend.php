@@ -9,7 +9,7 @@ class MatchFriend extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 'matched_user_id', 'status', 'matched_at'
+        'user_id', 'matched_user_id', 'status', 'matched_at', 'is_mutual'
     ];
 
     public function user()

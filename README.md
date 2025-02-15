@@ -23,3 +23,5 @@ php artisan passport:client --personal
 
 - Laravel Socialite : composer require laravel/socialite
 
+- Agora : composer require agora/agora-rtc
+
