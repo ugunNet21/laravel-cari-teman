@@ -7,5 +7,19 @@ App Cari Friend adalah aplikasi yang memungkinkan pengguna untuk mencari teman b
 - Web Socket  : composer require beyondcode/laravel-websockets
 - Pusher : composer require pusher/pusher-php-server
 - Laravel Passport : composer require laravel/passport
+
+````
+php artisan passport:install
+php artisan migrate
+php artisan passport:install --uuids
+php artisan passport:keys
+php artisan vendor:publish --tag=passport-config
+php artisan vendor:publish --tag=passport-migrations
+php artisan passport:client
+php artisan passport:client --public
+php artisan passport:client --password
+php artisan passport:client --personal
+````
+
 - Laravel Socialite : composer require laravel/socialite
 
